@@ -35,7 +35,7 @@ const albums = [
         title: 'Album 1',
         artist: 'Artist 1',
         releaseYear: 2022,
-        imageUrl: 'http://localhost:3000/images/album-images/1989-ts-album1.jpg', // Adjust the path as needed
+        imageUrl: 'https://kodego-music-player.onrender.com//images/album-images/1989-ts-album1.jpg', // Adjust the path as needed
         website: 'https://open.spotify.com/album/5fy0X0JmZRZnVa2UEicIOl' // Add the external website link
     },
     {
