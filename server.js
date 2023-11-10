@@ -214,19 +214,19 @@ app.get('/api/albums/:id', (req, res) => {
 app.get('/api/related-artists', (req, res) => {
     const relatedArtists = [
         {
-            name: 'Related Artist 1',
+            name: 'Ariana Grande',
             imageUrl: 'https://kodego-music-player.onrender.com/images/related-artists/r-artist1-ariana-grande.jpg', // Adjust the path as needed
-            website: 'https://www.example.com/related-artist1' // Add the external website link
+            website: 'https://open.spotify.com/artist/66CXWjxzNUsdJxJ2JdwvnR' // Add the external website link
         },
         {
-            name: 'Related Artist 2',
+            name: 'Ed Sheeran',
             imageUrl: 'https://kodego-music-player.onrender.com/images/related-artists/r-artist2-ed-sheeran.jpg', // Adjust the path as needed
-            website: 'https://www.example.com/related-artist2' // Add the external website link
+            website: 'https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V' // Add the external website link
         },
         {
-            name: 'Related Artist 3',
+            name: 'Katy Perry',
             imageUrl: 'https://kodego-music-player.onrender.com/images/related-artists/r-artist3-katy-perry.jpg', // Adjust the path as needed
-            website: 'https://www.example.com/related-artist3' // Add the external website link
+            website: 'https://open.spotify.com/artist/6jJ0s89eD6GaHleKKya26X' // Add the external website link
         },
     ];
 
