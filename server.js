@@ -12,7 +12,7 @@ const songData = {
     artist: 'Taylor Swift',
     name: 'All Too Well (Taylor\'s Version)',
     lyrics: `
-    [Verse 1]
+[Verse 1]
 I walked through the door with you, the air was cold
 But something 'bout it felt like home somehow
 And I left my scarf there at your sister's house
