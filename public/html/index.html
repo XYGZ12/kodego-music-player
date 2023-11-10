@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link href="../css/styles.css" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/eb03237b3a.js" crossorigin="anonymous"></script>
+    <script src="../script.js" type="module"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="music-player">
+            <div class="player-container">
+                <div class="player-info">
+                    <img src="../images/thumbnail.png" class="song-img">
+                    <h1 id="song-title">All Too Well (Taylor's Version)</h1>
+                    <p id="song-artist">Taylor Swift</p>
+                    <audio id="song">
+                        <source src="../audio/all-too-well-taylor's-version-taylor-swift.mp3" type="audio/mpeg">
+                    </audio>
+                    <input type="range" value="0" id="progress">
+                    <div class="controls">
+                        <div onclick="playPreviousSong()"><i class="fa-solid fa-backward"></i></div>
+                        <div onclick="playPause()"><i class="fa-solid fa-play" id="ctrlIcon"></i></div>
+                        <div onclick="playNextSong()"><i class="fa-solid fa-forward"></i></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="explore-heading">
+            <h2>Explore</h2>
+        </div>
+
+        <div class="tabs-container">
+            <ul class="tab-links">
+                <li><a href="#lyricsTab">Lyrics</a></li>
+                <li><a href="#albumsTab">Other Albums</a></li>
+                <li><a href="#artistsTab">Related Artists</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="lyricsTab" class="tab active"> <!-- 'active' class for the initially active tab -->
+                    <h2>Lyrics</h2>
+                    <div class="lyrics-container" id="lyricsContainer"></div>
+                </div>
+                <div id="albumsTab" class="tab">
+                    <h2>Other Albums</h2>
+                    <div class="album-info" id="albumInfoContainer"></div>
+                </div>
+                <div id="artistsTab" class="tab">
+                    <h2>Related Artists</h2>
+                    <div class="related-artists" id="relatedArtistsContainer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Next/Previous Song
+const songs = [
+  {
+    "title": "All Too Well (Taylor's Version)",
+    "artist": "Taylor Swift",
+    "source": "../audio/all-too-well-taylor's-version-taylor-swift.mp3"
+  },
+  {
+    "title": "Red (Taylor's Version)",
+    "artist": "Taylor Swift",
+    "source": "../audio/red-taylor's-version-taylor-swift.mp3"
+  },
+  {
+    "title": "Begin Again (Taylor's Version)",
+    "artist": "Taylor Swift",
+    "source": "../audio/begin-again-taylor's-version-taylor-swift.mp3"
+  },
+  // Add more songs as needed
+];
+
+// Function to load and play a song
+function loadAndPlaySong() {
+    const song = songs[currentSongIndex];
+    document.getElementById("song-title").textContent = song.title;
+    document.getElementById("song-artist").textContent = song.artist;
+    document.getElementById("song").src = song.source;
+    document.getElementById("song").load();
+    playPause(); // Auto-play the newly loaded song if it was playing before
+}
+
+// Variable for Tracking Current Song
+let currentSongIndex = 0;
+
+// Create Functions for Next and Previous Songs
+function playNextSong() {
+  currentSongIndex = (currentSongIndex + 1) % songs.length;
+  loadAndPlaySong();
+}
+
+function playPreviousSong() {
+  currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+  loadAndPlaySong();
+}
+
+function loadAndPlaySong() {
+            const song = songs[currentSongIndex];
+            document.getElementById("song-title").textContent = song.title;
+            document.getElementById("song-artist").textContent = song.artist;
+            document.getElementById("song").src = song.source;
+            document.getElementById("song").load();
+
+            // Play the song if it was playing before
+            if (isPlaying()) {
+                playPause();
+            }
+        }
+
+        // Function to check if the song is playing
+        function isPlaying() {
+            return !song.paused;
+        }
+
+
+
+    // Music Player Script
+        let progress = document.getElementById("progress");
+        let song = document.getElementById("song");
+        let ctrlIcon = document.getElementById("ctrlIcon");
+        let progressInterval;
+    
+        song.onloadedmetadata = function() {
+            progress.max = song.duration;
+            progress.value = song.currentTime;
+        }
+    
+// Play/Pause Function
+        function playPause() {
+        if (ctrlIcon.classList.contains("fa-pause")) {
+        song.pause();
+        ctrlIcon.classList.remove("fa-pause");
+        ctrlIcon.classList.add("fa-play");
+        clearInterval(progressInterval);
+        } else {
+        song.play();
+        ctrlIcon.classList.add("fa-pause");
+        ctrlIcon.classList.remove("fa-play");
+        progressInterval = setInterval(() => {
+        progress.value = song.currentTime;
+        }, 500);
+    }
+}
+
+    
+        progress.onchange = function() {
+            song.currentTime = progress.value;
+        }
+
+// Lyrics API Script
+const artistName = 'TS'; // Replace with the actual artist name
+const songName = 'ATW'; // Replace with the actual song name
+const lyricsContainer = document.getElementById('lyricsContainer');
+
+fetch(`/api/lyrics/${artistName}/${songName}`)
+    .then(response => response.json())
+    .then(data => {
+        if (data.lyrics) {
+            lyricsContainer.innerHTML = `
+                <h2>${data.artist} - ${data.song}</h2>
+            `;
+            const pre = document.createElement('pre');
+            pre.textContent = data.lyrics;
+            lyricsContainer.appendChild(pre);
+        } else {
+            lyricsContainer.textContent = 'Lyrics not found.';
+        }
+    })
+    .catch(error => {
+        console.error(error);
+        lyricsContainer.textContent = 'Error fetching lyrics.';
+    });
+
+    // Function to fetch and display album information
+    function fetchAlbums() {
+    fetch('/api/albums') // Make a GET request to fetch album data
+        .then(response => response.json())
+        .then(albums => {
+            const albumInfoContainer = document.getElementById('albumInfoContainer');
+            albumInfoContainer.innerHTML = ''; // Clear any existing content
+
+            albums.forEach(album => {
+                // Create a div element for each album
+                const albumDiv = document.createElement('div');
+                albumDiv.className = 'album-card';
+
+                // Create an anchor tag for the album link
+                const albumLink = document.createElement('a');
+                albumLink.href = album.website; // Link to the external website
+                albumLink.target = '_blank'; // Open in a new tab
+                albumDiv.appendChild(albumLink);
+
+                // Create an image element for the album cover
+                const albumImage = document.createElement('img');
+                albumImage.src = album.imageUrl;
+                albumImage.alt = album.title; // Add alt text for accessibility
+                albumLink.appendChild(albumImage);
+
+                // Create a paragraph for the album title
+                const albumTitle = document.createElement('p');
+                albumTitle.textContent = album.title;
+                albumLink.appendChild(albumTitle);
+
+                // Create a paragraph for the release year
+                const albumReleaseYear = document.createElement('p');
+                albumReleaseYear.textContent = `Released in ${album.releaseYear}`;
+                albumLink.appendChild(albumReleaseYear);
+
+                // Append the album div to the album info container
+                albumInfoContainer.appendChild(albumDiv);
+            });
+        })
+        .catch(error => {
+            console.error(error);
+            // Handle errors if the request fails
+        });
+}
+
+
+// Call the function to fetch and display album information
+fetchAlbums();
+
+function fetchRelatedArtists() {
+    fetch('/api/related-artists') // Make a GET request to fetch related artist data
+        .then(response => response.json())
+        .then(relatedArtists => {
+            const relatedArtistsContainer = document.getElementById('relatedArtistsContainer');
+            relatedArtistsContainer.innerHTML = ''; // Clear any existing content
+
+            relatedArtists.forEach(artist => {
+                // Create a div element for each related artist
+                const artistDiv = document.createElement('div');
+                artistDiv.className = 'artist-card';
+
+                // Create an anchor tag for the artist link
+                const artistLink = document.createElement('a');
+                artistLink.href = artist.website; // Link to the external website
+                artistLink.target = '_blank'; // Open in a new tab
+                artistDiv.appendChild(artistLink);
+
+                // Create an image element for the artist
+                const artistImage = document.createElement('img');
+                artistImage.src = artist.imageUrl;
+                artistImage.alt = artist.name; // Add alt text for accessibility
+                artistLink.appendChild(artistImage);
+
+                // Create a paragraph for the artist name
+                const artistName = document.createElement('p');
+                artistName.textContent = artist.name;
+                artistLink.appendChild(artistName);
+
+                // Append the artist div to the related artists container
+                relatedArtistsContainer.appendChild(artistDiv);
+            });
+        })
+        .catch(error => {
+            console.error(error);
+            // Handle errors if the request fails
+        });
+}
+
+// Call the function to fetch and display related artist information
+fetchRelatedArtists();
+
+// JavaScript to handle tab switching
+document.addEventListener('DOMContentLoaded', function () {
+    const tabLinks = document.querySelectorAll('.tab-links a');
+    const tabContents = document.querySelectorAll('.tab-content .tab');
+
+    tabLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetTabId = link.getAttribute('href').substring(1);
+
+            tabContents.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            document.getElementById(targetTabId).classList.add('active');
+        });
+    });
+});
+
+
+
+    </script>
+    
+</body>
+</html>
