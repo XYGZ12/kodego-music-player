@@ -43,7 +43,7 @@ const albums = [
         title: 'Album 2',
         artist: 'Artist 2',
         releaseYear: 2021,
-        imageUrl: 'http://localhost:3000/images/album-images/folklore-ts-album2.jpg', // Adjust the path as needed
+        imageUrl: 'https://kodego-music-player.onrender.com/images/album-images/folklore-ts-album2.jpg', // Adjust the path as needed
         website: 'https://www.example.com/album2' // Add the external website link
     },
     {
@@ -51,7 +51,7 @@ const albums = [
         title: 'Album 3',
         artist: 'Artist 3',
         releaseYear: 2020,
-        imageUrl: 'http://localhost:3000/images/album-images/fearless-ts-version-album3.jpg', // Adjust the path as needed
+        imageUrl: 'https://kodego-music-player.onrender.com/images/album-images/fearless-ts-version-album3.jpg', // Adjust the path as needed
         website: 'https://www.example.com/album3' // Add the external website link
     },
 ];
@@ -77,17 +77,17 @@ app.get('/api/related-artists', (req, res) => {
     const relatedArtists = [
         {
             name: 'Related Artist 1',
-            imageUrl: 'http://localhost:3000/images/related-artists/r-artist1-ariana-grande.jpg', // Adjust the path as needed
+            imageUrl: 'https://kodego-music-player.onrender.com/images/related-artists/r-artist1-ariana-grande.jpg', // Adjust the path as needed
             website: 'https://www.example.com/related-artist1' // Add the external website link
         },
         {
             name: 'Related Artist 2',
-            imageUrl: 'http://localhost:3000/images/related-artists/r-artist2-ed-sheeran.jpg', // Adjust the path as needed
+            imageUrl: 'https://kodego-music-player.onrender.com/images/related-artists/r-artist2-ed-sheeran.jpg', // Adjust the path as needed
             website: 'https://www.example.com/related-artist2' // Add the external website link
         },
         {
             name: 'Related Artist 3',
-            imageUrl: 'http://localhost:3000/images/related-artists/r-artist3-katy-perry.jpg', // Adjust the path as needed
+            imageUrl: 'https://kodego-music-player.onrender.com/images/related-artists/r-artist3-katy-perry.jpg', // Adjust the path as needed
             website: 'https://www.example.com/related-artist3' // Add the external website link
         },
     ];
