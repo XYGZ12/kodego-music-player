@@ -32,7 +32,7 @@ app.get('/api/lyrics/:artist/:song', (req, res) => {
 const albums = [
     {
         id: 1,
-        title: 'Album 1',
+        title: '1989',
         artist: 'Artist 1',
         releaseYear: 2022,
         imageUrl: 'https://kodego-music-player.onrender.com/images/album-images/1989-ts-album1.jpg', // Adjust the path as needed
@@ -40,7 +40,7 @@ const albums = [
     },
     {
         id: 2,
-        title: 'Album 2',
+        title: 'Folklore',
         artist: 'Artist 2',
         releaseYear: 2021,
         imageUrl: 'https://kodego-music-player.onrender.com/images/album-images/folklore-ts-album2.jpg', // Adjust the path as needed
@@ -48,7 +48,7 @@ const albums = [
     },
     {
         id: 3,
-        title: 'Album 3',
+        title: 'Fearless - Taylor\'s Version',
         artist: 'Artist 3',
         releaseYear: 2020,
         imageUrl: 'https://kodego-music-player.onrender.com/images/album-images/fearless-ts-version-album3.jpg', // Adjust the path as needed
