@@ -17,3 +17,7 @@ How To Access This App/ Locally:
 ---
 How to Access the Deployed Version of this App:
 1. Just go this link: https://kodego-music-player.onrender.com/
+---
+Notes:
+1. To play the next song, click the pause button first, then click the next or previous button. Then click the play button after that.
+2. The items in the 'Other Albums' section and 'Related Artists' section are clickable. If you click them, they will redirect you to the spotify link/playlist of the said albums and artists.
