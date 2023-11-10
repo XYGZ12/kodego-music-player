@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
 
 const songData = {
     artist: 'Taylor Swift',
-    name: 'All Too Well - Taylor\'s Version',
+    name: 'All Too Well (Taylor\'s Version)',
     lyrics: `
     [Verse 1]
 I walked through the door with you, the air was cold
@@ -186,7 +186,7 @@ const albums = [
     },
     {
         id: 3,
-        title: 'Fearless - Taylor\'s Version',
+        title: 'Fearless (Taylor\'s Version)',
         artist: 'Artist 3',
         releaseYear: 2020,
         imageUrl: 'https://kodego-music-player.onrender.com/images/album-images/fearless-ts-version-album3.jpg', // Adjust the path as needed
