@@ -4,7 +4,7 @@ The project structure for this app is:
 The root folder has a public sub-folder which contains the html, css and javascript files for this project. It also contains the audio and image files that were used in this project. Each of them has a folder of their own. Except for the javascript script, because it's inside the html file of this project. I have used node.js for this project. I used it for the api endpoints. And so I have a server.js file on the root-folder(kodego-music-player) as well.
 ---
 Compromises & Such:
-Because of time constraints, I have focused on the functionality of the app. With more time, I would like to improve the design and ui of my music player app.
+Because of time constraints, I have focused on the functionality of the app. With more time, I would like to improve the design and ui of my music player app. I wanted to use codepen.io for my solution... but it seems like I can't use node.js in this platform. So I chose to use Github to present my solution instead, since my app is using node.js.
 ---
 Error Cases & Such:
 The app doesn't have unhandled errors.
